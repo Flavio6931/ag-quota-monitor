@@ -1,0 +1,23 @@
+{
+  "extension.description": "Monitor Antigravity model quotas, 5-hour & weekly reset timers, AI credits, and active models via the official Antigravity CLI.",
+  "command.refresh.title": "Refresh Quota Now",
+  "command.showMenu.title": "Show Quick Menu",
+  "command.openDashboard.title": "Open Quota Dashboard",
+  "command.configureBinaryPath.title": "Configure agy Binary Path",
+  "command.showLogs.title": "Show Diagnostic Logs",
+  "viewContainer.title": "AG Quota Monitor",
+  "view.dashboard.name": "Quota Dashboard",
+  "config.enabled.description": "Enable automatic background quota polling.",
+  "config.pollingInterval.description": "Polling interval in seconds (minimum: 60s, default: 300s).",
+  "config.pauseWhenUnfocused.description": "Pause automatic polling while the editor window is unfocused.",
+  "config.binaryPath.description": "Custom path to the official 'agy' CLI executable. Leave empty for automatic detection.",
+  "config.pinnedGroups.description": "Quota group names pinned to the status bar (empty shows all groups; ['none'] hides all groups).",
+  "config.statusBarFormat.description": "Format used to render quota groups in the status bar.",
+  "config.statusBarFormat.compact": "Short names and compact percentages (e.g. Gemini 90%|38%).",
+  "config.statusBarFormat.detailed": "Includes window labels (e.g. Gemini [5h: 90% | 1w: 38%]).",
+  "config.showCreditsInStatusBar.description": "Show remaining AI credits in the status bar.",
+  "config.warningThreshold.description": "Remaining percentage below which a quota bucket shows a warning state.",
+  "config.criticalThreshold.description": "Remaining percentage below which a quota bucket shows a critical error state.",
+  "config.notifyOnLowQuota.description": "Show a notification when a quota bucket drops below warning, critical, or exhausted thresholds.",
+  "config.notifyOnReset.description": "Show a notification when a previously exhausted quota bucket resets."
+}

@@ -1,0 +1,201 @@
+{
+  "name": "ag-quota-monitor",
+  "displayName": "AG Quota Monitor",
+  "description": "%extension.description%",
+  "version": "1.0.0",
+  "publisher": "flavio6931",
+  "author": {
+    "name": "Flavio Morales",
+    "url": "https://github.com/Flavio6931"
+  },
+  "license": "MIT",
+  "icon": "assets/icon.png",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Flavio6931/ag-quota-monitor.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Flavio6931/ag-quota-monitor/issues"
+  },
+  "homepage": "https://github.com/Flavio6931/ag-quota-monitor#readme",
+  "engines": {
+    "vscode": "^1.90.0"
+  },
+  "main": "./dist/extension.js",
+  "categories": [
+    "Visualization",
+    "Other"
+  ],
+  "keywords": [
+    "antigravity",
+    "quota",
+    "usage",
+    "gemini",
+    "ai",
+    "monitor",
+    "status-bar"
+  ],
+  "galleryBanner": {
+    "color": "#0F172A",
+    "theme": "dark"
+  },
+  "l10n": "./l10n",
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "contributes": {
+    "commands": [
+      {
+        "command": "agQuotaMonitor.refresh",
+        "title": "%command.refresh.title%",
+        "category": "AG Quota Monitor",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "agQuotaMonitor.showMenu",
+        "title": "%command.showMenu.title%",
+        "category": "AG Quota Monitor"
+      },
+      {
+        "command": "agQuotaMonitor.openDashboard",
+        "title": "%command.openDashboard.title%",
+        "category": "AG Quota Monitor",
+        "icon": "$(dashboard)"
+      },
+      {
+        "command": "agQuotaMonitor.configureBinaryPath",
+        "title": "%command.configureBinaryPath.title%",
+        "category": "AG Quota Monitor"
+      },
+      {
+        "command": "agQuotaMonitor.showLogs",
+        "title": "%command.showLogs.title%",
+        "category": "AG Quota Monitor"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "agQuotaMonitor",
+          "title": "%viewContainer.title%",
+          "icon": "assets/sidebar-icon.svg"
+        }
+      ]
+    },
+    "views": {
+      "agQuotaMonitor": [
+        {
+          "type": "webview",
+          "id": "agQuotaMonitor.dashboardView",
+          "name": "%view.dashboard.name%"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "AG Quota Monitor",
+      "properties": {
+        "agQuotaMonitor.enabled": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.enabled.description%",
+          "order": 1
+        },
+        "agQuotaMonitor.pollingInterval": {
+          "type": "number",
+          "default": 300,
+          "minimum": 60,
+          "maximum": 3600,
+          "description": "%config.pollingInterval.description%",
+          "order": 2
+        },
+        "agQuotaMonitor.pauseWhenUnfocused": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.pauseWhenUnfocused.description%",
+          "order": 3
+        },
+        "agQuotaMonitor.binaryPath": {
+          "type": "string",
+          "default": "",
+          "description": "%config.binaryPath.description%",
+          "order": 4
+        },
+        "agQuotaMonitor.pinnedGroups": {
+          "type": "array",
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "description": "%config.pinnedGroups.description%",
+          "order": 5
+        },
+        "agQuotaMonitor.statusBarFormat": {
+          "type": "string",
+          "enum": [
+            "compact",
+            "detailed"
+          ],
+          "default": "compact",
+          "enumDescriptions": [
+            "%config.statusBarFormat.compact%",
+            "%config.statusBarFormat.detailed%"
+          ],
+          "description": "%config.statusBarFormat.description%",
+          "order": 6
+        },
+        "agQuotaMonitor.showCreditsInStatusBar": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.showCreditsInStatusBar.description%",
+          "order": 7
+        },
+        "agQuotaMonitor.warningThreshold": {
+          "type": "number",
+          "default": 20,
+          "minimum": 1,
+          "maximum": 99,
+          "description": "%config.warningThreshold.description%",
+          "order": 8
+        },
+        "agQuotaMonitor.criticalThreshold": {
+          "type": "number",
+          "default": 5,
+          "minimum": 0,
+          "maximum": 98,
+          "description": "%config.criticalThreshold.description%",
+          "order": 9
+        },
+        "agQuotaMonitor.notifyOnLowQuota": {
+          "type": "boolean",
+          "default": true,
+          "description": "%config.notifyOnLowQuota.description%",
+          "order": 10
+        },
+        "agQuotaMonitor.notifyOnReset": {
+          "type": "boolean",
+          "default": false,
+          "description": "%config.notifyOnReset.description%",
+          "order": 11
+        }
+      }
+    }
+  },
+  "scripts": {
+    "build": "node esbuild.config.mjs",
+    "build:prod": "node esbuild.config.mjs --production",
+    "watch": "node esbuild.config.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "node esbuild.config.mjs --tests && node --test dist-test/*.test.cjs",
+    "package": "npm run build:prod && npx @vscode/vsce package",
+    "publish:vsce": "npm run build:prod && npx @vscode/vsce publish",
+    "publish:ovsx": "npm run build:prod && npx ovsx publish"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/vscode": "^1.90.0",
+    "@vscode/vsce": "^3.2.2",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.2"
+  },
+  "dependencies": {}
+}

@@ -1,0 +1,16 @@
+.vscode/**
+.vscode-test/**
+.github/**
+.project-memory/**
+.agents/**
+.obsidian_vault
+src/**
+test/**
+dist-test/**
+node_modules/**
+.gitignore
+tsconfig.json
+esbuild.config.mjs
+**/*.map
+**/*.ts
+*.vsix

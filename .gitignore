@@ -1,0 +1,10 @@
+node_modules/
+dist/
+dist-test/
+*.vsix
+*.log
+.DS_Store
+Thumbs.db
+.project-memory/
+.agents/
+.obsidian_vault

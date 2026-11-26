@@ -1,0 +1,23 @@
+{
+  "extension.description": "Monitorea cuotas de modelos de Antigravity, temporizadores de reinicio (5h y semanal), créditos de IA y modelo activo usando el CLI oficial.",
+  "command.refresh.title": "Actualizar cuotas ahora",
+  "command.showMenu.title": "Abrir menú rápido",
+  "command.openDashboard.title": "Abrir panel de cuotas",
+  "command.configureBinaryPath.title": "Configurar ruta del binario agy",
+  "command.showLogs.title": "Mostrar registros de diagnóstico",
+  "viewContainer.title": "AG Quota Monitor",
+  "view.dashboard.name": "Panel de Cuotas",
+  "config.enabled.description": "Habilitar la actualización automática de cuotas en segundo plano.",
+  "config.pollingInterval.description": "Intervalo de actualización en segundos (mínimo: 60s, predeterminado: 300s).",
+  "config.pauseWhenUnfocused.description": "Pausar las consultas automáticas cuando la ventana del editor no tiene el foco.",
+  "config.binaryPath.description": "Ruta personalizada al ejecutable oficial 'agy'. Déjalo vacío para detección automática.",
+  "config.pinnedGroups.description": "Grupos de cuota fijados en la barra de estado (vacío muestra todos; ['none'] oculta los grupos).",
+  "config.statusBarFormat.description": "Formato para mostrar los grupos de cuota en la barra de estado.",
+  "config.statusBarFormat.compact": "Nombres cortos y porcentajes compactos (ej. Gemini 90%|38%).",
+  "config.statusBarFormat.detailed": "Incluye etiquetas de ventana (ej. Gemini [5h: 90% | 1w: 38%]).",
+  "config.showCreditsInStatusBar.description": "Mostrar los créditos de IA restantes en la barra de estado.",
+  "config.warningThreshold.description": "Porcentaje restante por debajo del cual una cuota muestra advertencia.",
+  "config.criticalThreshold.description": "Porcentaje restante por debajo del cual una cuota muestra estado crítico.",
+  "config.notifyOnLowQuota.description": "Mostrar una notificación cuando una cuota baje de los umbrales de advertencia, crítico o agotado.",
+  "config.notifyOnReset.description": "Mostrar una notificación cuando una cuota agotada vuelva a estar disponible."
+}
