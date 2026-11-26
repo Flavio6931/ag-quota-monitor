@@ -15,6 +15,7 @@
   "config.statusBarFormat.description": "Formato para mostrar los grupos de cuota en la barra de estado.",
   "config.statusBarFormat.compact": "Nombres cortos y porcentajes compactos (ej. Gemini 90%|38%).",
   "config.statusBarFormat.detailed": "Incluye etiquetas de ventana (ej. Gemini [5h: 90% | 1w: 38%]).",
+  "config.statusBarFormat.bars": "Micro-barras de progreso en línea (ej. Gemini 5h ▓▓▓▓░ 90% · 1w ▓▓░░░ 38%).",
   "config.showCreditsInStatusBar.description": "Mostrar los créditos de IA restantes en la barra de estado.",
   "config.warningThreshold.description": "Porcentaje restante por debajo del cual una cuota muestra advertencia.",
   "config.criticalThreshold.description": "Porcentaje restante por debajo del cual una cuota muestra estado crítico.",

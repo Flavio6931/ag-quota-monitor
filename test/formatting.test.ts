@@ -3,6 +3,7 @@ import test from 'node:test';
 import { QuotaSnapshot } from '../src/core/types';
 import {
 	drawProgressBar,
+	findTightestBucket,
 	formatDuration,
 	formatResetInfo,
 	formatStatusBarText,
@@ -104,6 +105,20 @@ test('formatStatusBarText formats compact, detailed, and credits states', () => 
 		criticalThreshold: 5,
 	});
 	assert.equal(detailed.text, '$(warning) Gemini [5h: 90% | 1w: 15%]');
+
+	const bars = formatStatusBarText(snapshot, {
+		pinnedGroups: [],
+		statusBarFormat: 'bars',
+		showCreditsInStatusBar: false,
+		warningThreshold: 20,
+		criticalThreshold: 5,
+	});
+	assert.equal(bars.text, '$(warning) Gemini 5h ▓▓▓▓▓ 90% · 1w ▓░░░░ 15%');
+
+	const tightest = findTightestBucket(snapshot);
+	assert.ok(tightest !== null);
+	assert.equal(tightest.bucket.id, 'g-1w');
+	assert.equal(tightest.bucket.remainingPercentage, 15);
 
 	const hidden = formatStatusBarText(snapshot, {
 		pinnedGroups: ['none'],

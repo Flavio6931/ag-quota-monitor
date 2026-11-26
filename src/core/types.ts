@@ -4,7 +4,7 @@
 
 export type QuotaSeverity = 'ok' | 'warning' | 'critical' | 'exhausted' | 'unknown';
 
-export type StatusBarFormat = 'compact' | 'detailed';
+export type StatusBarFormat = 'compact' | 'detailed' | 'bars';
 
 export interface QuotaBucket {
 	id: string;

@@ -15,6 +15,7 @@
   "config.statusBarFormat.description": "Format used to render quota groups in the status bar.",
   "config.statusBarFormat.compact": "Short names and compact percentages (e.g. Gemini 90%|38%).",
   "config.statusBarFormat.detailed": "Includes window labels (e.g. Gemini [5h: 90% | 1w: 38%]).",
+  "config.statusBarFormat.bars": "Inline progress micro-bars (e.g. Gemini 5h ▓▓▓▓░ 90% · 1w ▓▓░░░ 38%).",
   "config.showCreditsInStatusBar.description": "Show remaining AI credits in the status bar.",
   "config.warningThreshold.description": "Remaining percentage below which a quota bucket shows a warning state.",
   "config.criticalThreshold.description": "Remaining percentage below which a quota bucket shows a critical error state.",

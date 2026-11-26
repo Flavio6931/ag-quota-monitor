@@ -1,6 +1,6 @@
 import * as vscode from 'vscode';
 import { classifySeverity } from '../core/parser';
-import { AgyClientError, ExtensionConfig, QuotaSnapshot } from '../core/types';
+import { AgyClientError, ExtensionConfig, QuotaSnapshot, StatusBarFormat } from '../core/types';
 import {
 	drawProgressBar,
 	formatResetInfo,
@@ -114,8 +114,12 @@ export class StatusBarController implements vscode.Disposable {
 			ready: vscode.l10n.t('Ready'),
 		};
 
+		lines.push(
+			`| ${vscode.l10n.t('Group')} | ${vscode.l10n.t('Window')} | ${vscode.l10n.t('Progress')} | ${vscode.l10n.t('Remaining')} | ${vscode.l10n.t('Reset')} |`,
+			'| :--- | :---: | :--- | :---: | :--- |'
+		);
+
 		for (const group of snapshot.groups) {
-			lines.push(`**${group.name}**`);
 			for (const bucket of group.buckets) {
 				const pct =
 					bucket.remainingPercentage !== undefined
@@ -139,13 +143,19 @@ export class StatusBarController implements vscode.Disposable {
 						: '$(check)';
 
 				lines.push(
-					`- ${icon} **${getWindowShortLabel(bucket.window)}:** \`${bar}\` **${pct}** — ${resetText}`
+					`| ${icon} **${getGroupShortName(group.name)}** | \`${getWindowShortLabel(
+						bucket.window
+					)}\` | \`${bar}\` | **${pct}** | ${resetText} |`
 				);
 			}
-			if (group.models.length > 0) {
-				lines.push(`  _${group.models.join(', ')}_`);
-			}
-			lines.push('');
+		}
+		lines.push('');
+
+		const modelSummaries = snapshot.groups
+			.filter(g => g.models.length > 0)
+			.map(g => `**${getGroupShortName(g.name)}:** _${g.models.join(', ')}_`);
+		if (modelSummaries.length > 0) {
+			lines.push(...modelSummaries, '');
 		}
 
 		if (error) {
@@ -193,8 +203,9 @@ export class StatusBarController implements vscode.Disposable {
 					await this.toggleConfigBoolean('showCreditsInStatusBar');
 					break;
 				case 'toggleFormat': {
+					const order: StatusBarFormat[] = ['compact', 'detailed', 'bars'];
 					const current = this.getConfig().statusBarFormat;
-					const next = current === 'compact' ? 'detailed' : 'compact';
+					const next = order[(order.indexOf(current) + 1) % order.length];
 					await vscode.workspace
 						.getConfiguration('agQuotaMonitor')
 						.update('statusBarFormat', next, vscode.ConfigurationTarget.Global);
@@ -276,12 +287,14 @@ export class StatusBarController implements vscode.Disposable {
 			action: { type: 'toggleCredits' },
 		});
 
+		const formatLabel =
+			cfg.statusBarFormat === 'compact'
+				? vscode.l10n.t('Status Bar Format: Detailed')
+				: cfg.statusBarFormat === 'detailed'
+				? vscode.l10n.t('Status Bar Format: Micro-Bars')
+				: vscode.l10n.t('Status Bar Format: Compact');
 		items.push({
-			label: `$(list-flat) ${
-				cfg.statusBarFormat === 'compact'
-					? vscode.l10n.t('Status Bar Format: Detailed')
-					: vscode.l10n.t('Status Bar Format: Compact')
-			}`,
+			label: `$(list-flat) ${formatLabel}`,
 			action: { type: 'toggleFormat' },
 		});
 

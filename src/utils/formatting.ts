@@ -187,6 +187,27 @@ function formatBucketPct(bucket: QuotaBucket): string {
 }
 
 /**
+ * Devuelve el bucket con el menor porcentaje restante (<100%) para el resumen superior.
+ */
+export function findTightestBucket(
+	snapshot: QuotaSnapshot
+): { groupName: string; bucket: QuotaBucket } | null {
+	let tightest: { groupName: string; bucket: QuotaBucket; pct: number } | null = null;
+	for (const group of snapshot.groups) {
+		for (const bucket of group.buckets) {
+			const pct = bucket.remainingPercentage;
+			if (pct === undefined || pct >= 100) {
+				continue;
+			}
+			if (!tightest || pct < tightest.pct) {
+				tightest = { groupName: group.name, bucket, pct };
+			}
+		}
+	}
+	return tightest ? { groupName: tightest.groupName, bucket: tightest.bucket } : null;
+}
+
+/**
  * Construye el texto y la severidad global para mostrar en la barra de estado de VS Code.
  */
 export function formatStatusBarText(
@@ -224,6 +245,11 @@ export function formatStatusBarText(
 				b => `${getWindowShortLabel(b.window)}: ${formatBucketPct(b)}`
 			);
 			parts.push(`${icon} ${shortName} [${bucketParts.join(' | ')}]`);
+		} else if (config.statusBarFormat === 'bars') {
+			const bucketParts = group.buckets.map(
+				b => `${getWindowShortLabel(b.window)} ${drawProgressBar(b.remainingPercentage, 5)} ${formatBucketPct(b)}`
+			);
+			parts.push(`${icon} ${shortName} ${bucketParts.join(' · ')}`);
 		} else {
 			const pcts = group.buckets.map(b => formatBucketPct(b));
 			parts.push(`${icon} ${shortName} ${pcts.join('|')}`);

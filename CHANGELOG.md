@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.0 — 2026-11-26
+
+- Redesigned Sidebar Quota Dashboard inspired by the Figma v1.1 Cockpit UI:
+  - SVG radial quota rings (`5H` / `1W`) with tabular numerals, theme-adaptive tracks, and live countdowns.
+  - Tightest-limit callout banner highlighting the nearest quota constraint.
+  - Telemetry bento row for Active Model and AI Credits, color-coded group dots, and compact model chips.
+  - Guided `BINARY_NOT_FOUND` recovery actions and SVG toolbar controls.
+- Added new `"bars"` status bar display format (`Gemini 5h ▓▓▓▓░ 86% · 1w ▓▓░░░ 37%`) and QuickPick cycling.
+- Upgraded status bar hover tooltip to a cleanly aligned Markdown table.
+
 ## 1.0.0 — 2026-11-25
 
 - Initial release of **AG Quota Monitor** (`flavio6931.ag-quota-monitor`).

@@ -12,7 +12,8 @@ function readExtensionConfig(): ExtensionConfig {
 	const cfg = vscode.workspace.getConfiguration('agQuotaMonitor');
 	const rawInterval = cfg.get<number>('pollingInterval', 300);
 	const rawFormat = cfg.get<string>('statusBarFormat', 'compact');
-	const statusBarFormat: StatusBarFormat = rawFormat === 'detailed' ? 'detailed' : 'compact';
+	const statusBarFormat: StatusBarFormat =
+		rawFormat === 'detailed' || rawFormat === 'bars' ? rawFormat : 'compact';
 
 	return {
 		enabled: cfg.get<boolean>('enabled', true),

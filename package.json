@@ -2,7 +2,7 @@
   "name": "ag-quota-monitor",
   "displayName": "AG Quota Monitor",
   "description": "%extension.description%",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "publisher": "flavio6931",
   "author": {
     "name": "Flavio Morales",
@@ -133,12 +133,14 @@
           "type": "string",
           "enum": [
             "compact",
-            "detailed"
+            "detailed",
+            "bars"
           ],
           "default": "compact",
           "enumDescriptions": [
             "%config.statusBarFormat.compact%",
-            "%config.statusBarFormat.detailed%"
+            "%config.statusBarFormat.detailed%",
+            "%config.statusBarFormat.bars%"
           ],
           "description": "%config.statusBarFormat.description%",
           "order": 6
